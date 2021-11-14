@@ -4,7 +4,7 @@ query GetTaskQl($id: ID!) {
     id
     title
     body
-    status
+    state
     createdAt
     updatedAt
   }
@@ -19,7 +19,7 @@ query ListTaskQls(
       id
       title
       body
-      status
+      state
       createdAt
       updatedAt
     }

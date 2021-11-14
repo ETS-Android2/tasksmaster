@@ -1,5 +1,7 @@
 package com.dandelion.tasksmaster;
 
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
         public Task task;
         View itemView;
+
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
@@ -40,7 +43,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskAdapter.TaskViewHolder taskViewHolder, int position) {
+    public void onBindViewHolder(@NonNull TaskAdapter.TaskViewHolder taskViewHolder, @SuppressLint("RecyclerView") int position) {
         taskViewHolder.task = allTasks.get(position);
         TextView taskTitle = taskViewHolder.itemView.findViewById(R.id.taskTitleInFragment);
         TextView taskBody = taskViewHolder.itemView.findViewById(R.id.taskBodyInFragment);
