@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskQl;
 
@@ -53,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             Amplify.addPlugin(new AWSApiPlugin());
+            // Add this line, to include the Auth plugin.
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
+
 
             Log.i("Main Activity", "Initialized Amplify");
         } catch (AmplifyException error) {
