@@ -49,9 +49,6 @@ public class AddTask extends AppCompatActivity {
                     response -> Log.i("TasksApp", "add task with id" + response.getData().getId()),
                     error -> Log.e("TasksApp", "Create failed", error)
             );
-
-            Intent goToHomePage = new Intent(AddTask.this, MainActivity.class);
-            startActivity(goToHomePage);
         });
 
 
