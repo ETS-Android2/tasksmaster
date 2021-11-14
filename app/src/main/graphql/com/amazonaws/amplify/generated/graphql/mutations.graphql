@@ -1,0 +1,40 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateTaskQl(
+  $input: CreateTaskQlInput!
+  $condition: ModelTaskQlConditionInput
+) {
+  createTaskQl(input: $input, condition: $condition) {
+    id
+    title
+    body
+    status
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateTaskQl(
+  $input: UpdateTaskQlInput!
+  $condition: ModelTaskQlConditionInput
+) {
+  updateTaskQl(input: $input, condition: $condition) {
+    id
+    title
+    body
+    status
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteTaskQl(
+  $input: DeleteTaskQlInput!
+  $condition: ModelTaskQlConditionInput
+) {
+  deleteTaskQl(input: $input, condition: $condition) {
+    id
+    title
+    body
+    status
+    createdAt
+    updatedAt
+  }
+}
