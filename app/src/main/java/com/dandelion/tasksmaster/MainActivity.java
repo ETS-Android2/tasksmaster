@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -64,6 +65,19 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Main Activity", "Could not initialize Amplify", error);
         }
 
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
+
+
+        Amplify.Auth.signInWithWebUI(
+                this,
+                result -> Log.i("AuthQuickStart", result.toString()),
+                error -> Log.e("AuthQuickStart", error.toString())
+        );
+
+
         List<Task> tasks = new ArrayList<>();
         RecyclerView myTasks = findViewById(R.id.recycle);
         myTasks.setLayoutManager(new LinearLayoutManager(this));
@@ -88,6 +102,28 @@ public class MainActivity extends AppCompatActivity {
                 },
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );
+
+        Button signoutButton = findViewById(R.id.logoutBtn);
+        signoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+
+
+                Amplify.Auth.signOut(
+                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                        error -> Log.e("AuthQuickstart", error.toString())
+
+                );
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        recreate();
+                    }
+                }, 3000);
+            }
+        });
     }
 
     @SuppressLint("SetTextI18n")
