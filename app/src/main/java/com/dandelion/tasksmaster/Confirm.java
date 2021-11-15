@@ -13,43 +13,36 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 
-public class Login extends AppCompatActivity {
+public class Confirm extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_confirm);
 
-        EditText email = findViewById(R.id.signinEmail);
-        EditText password = findViewById(R.id.signinPassword);
+        EditText email = findViewById(R.id.confirmEmail);
         EditText code = findViewById(R.id.confirmCode);
-
         try {
             Amplify.addPlugin(new AWSApiPlugin());
-            // Add this line, to include the Auth plugin.
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.configure(getApplicationContext());
 
-
-            Log.i("Main Activity", "Initialized Amplify");
+            Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
-            Log.e("Main Activity", "Could not initialize Amplify", error);
+            Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
 
-        Button login = findViewById(R.id.loginBtn);
-        login.setOnClickListener(v -> {
-            Amplify.Auth.signIn(
-                    password.getText().toString(),
+        Button confirm = findViewById(R.id.confirmBtn);
+        confirm.setOnClickListener(view -> {
+            Amplify.Auth.confirmSignUp(
                     email.getText().toString(),
-                    result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+                    code.getText().toString(),
+                    result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
                     error -> Log.e("AuthQuickstart", error.toString())
             );
 
-            Intent goHome = new Intent(Login.this, MainActivity.class);
-            startActivity(goHome);
+            Intent intent = new Intent(Confirm.this, Login.class);
+            startActivity(intent);
         });
-
     }
 }
-
-
