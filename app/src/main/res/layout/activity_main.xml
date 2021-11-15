@@ -64,10 +64,10 @@
     <!--        app:srcCompat="@drawable/photo_1504805572947_34fad45aed93" />-->
 
     <Button
-        android:id="@+id/btn1ToDetails"
+        android:id="@+id/signupMain"
         android:layout_width="120dp"
         android:layout_height="55dp"
-        android:text="Task1"
+        android:text="Sign up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.058"
@@ -77,10 +77,10 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/btn2ToDetails"
+        android:id="@+id/signinMain"
         android:layout_width="120dp"
         android:layout_height="55dp"
-        android:text="Task2"
+        android:text="Sign in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
