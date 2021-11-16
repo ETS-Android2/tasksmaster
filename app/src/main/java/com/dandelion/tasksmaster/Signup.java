@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -49,9 +50,14 @@ public class Signup extends AppCompatActivity {
 
         Button signup = findViewById(R.id.signupButton);
         signup.setOnClickListener(v -> {
+            Amplify.Auth.fetchAuthSession(
+                    result -> Log.i("AmplifyQuickstart", result.toString()),
+                    error -> Log.e("AmplifyQuickstart", error.toString())
+            );
             AuthSignUpOptions options = AuthSignUpOptions.builder()
                     .userAttribute(AuthUserAttributeKey.email(), email.getText().toString())
                     .build();
+            Log.i("Signup", "onCreate: nawal" + email.getText().toString());
             Amplify.Auth.signUp(email.getText().toString(), password.getText().toString(), options,
                     result -> Log.i("AuthQuickStart", "Result: " + result.toString()),
                     error -> Log.e("AuthQuickStart", "Sign up failed", error)

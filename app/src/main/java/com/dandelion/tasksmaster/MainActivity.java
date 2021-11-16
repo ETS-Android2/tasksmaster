@@ -21,6 +21,7 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.TaskQl;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
@@ -57,19 +58,13 @@ public class MainActivity extends AppCompatActivity {
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
+            Amplify.addPlugin(new AWSDataStorePlugin());
             Amplify.configure(getApplicationContext());
-
 
             Log.i("Main Activity", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("Main Activity", "Could not initialize Amplify", error);
         }
-
-        Amplify.Auth.fetchAuthSession(
-                result -> Log.i("AmplifyQuickstart", result.toString()),
-                error -> Log.e("AmplifyQuickstart", error.toString())
-        );
-
 
         Amplify.Auth.signInWithWebUI(
                 this,
@@ -77,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AuthQuickStart", error.toString())
         );
 
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i("AmplifyQuickstart", result.toString()),
+                error -> Log.e("AmplifyQuickstart", error.toString())
+        );
 
         List<Task> tasks = new ArrayList<>();
         RecyclerView myTasks = findViewById(R.id.recycle);
@@ -85,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         @SuppressLint("NotifyDataSetChanged") Handler handler = new Handler(Looper.myLooper(), msg -> {
-
             Objects.requireNonNull(myTasks.getAdapter()).notifyDataSetChanged();
             return false;
         });
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 ModelQuery.list(TaskQl.class),
                 response -> {
                     for (TaskQl todo : response.getData()) {
-                        Task taskOrg = new Task(todo.getTitle(), todo.getBody(), todo.getState());
+                        Task taskOrg = new Task(todo.getTitle(), todo.getBody(), todo.getState(), todo.getImage());
                         Log.i("graph testing", todo.getTitle());
                         tasks.add(taskOrg);
                     }
@@ -105,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button signoutButton = findViewById(R.id.logoutBtn);
         signoutButton.setOnClickListener(V -> {
-
-
             Amplify.Auth.signOut(
                     () -> Log.i("AuthQuickstart", "Signed out successfully"),
                     error -> Log.e("AuthQuickstart", error.toString())
@@ -125,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button signinButton = findViewById(R.id.signinMain);
         signinButton.setOnClickListener(v -> {
-            Intent goToSignin = new Intent(MainActivity.this, Signup.class);
+            Intent goToSignin = new Intent(MainActivity.this, Login.class);
             startActivity(goToSignin);
         });
     }

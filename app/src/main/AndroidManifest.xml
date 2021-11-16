@@ -17,14 +17,14 @@
         <activity
             android:name=".Confirm"
             android:exported="false" />
-        <activity android:name=".Login" />
         <activity android:name=".Signup" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".TaskDetail" />
         <activity android:name=".Settings" />
         <activity android:name=".AllTasks" />
         <activity android:name=".AddTask" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

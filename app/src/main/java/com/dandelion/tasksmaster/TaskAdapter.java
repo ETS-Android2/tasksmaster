@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         taskTitle.setText(taskViewHolder.task.title);
         taskBody.setText(taskViewHolder.task.body);
         taskState.setText(taskViewHolder.task.state);
+        taskState.setText(taskViewHolder.task.state);
+
 
         taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +63,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 intent.putExtra("title", allTasks.get(position).title);
                 intent.putExtra("body", allTasks.get(position).body);
                 intent.putExtra("state", allTasks.get(position).state);
+                intent.putExtra("image", allTasks.get(position).image);
                 view.getContext().startActivity(intent);
             }
         });

@@ -19,12 +19,17 @@ public class Task {
     @ColumnInfo(name = "state")
     public String state;
 
+    @ColumnInfo(name = "image")
+    public String image;
+
+
     public Task(){
 
     }
-    public Task(String title, String body, String state) {
+    public Task(String title, String body, String state, String image) {
         this.title = title;
         this.body = body;
         this.state = state;
+        this.image=image;
     }
 }

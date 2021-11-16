@@ -3,4 +3,5 @@ type TaskQl @model {
   title: String!
   body: String
   state: String
+  image: String
 }

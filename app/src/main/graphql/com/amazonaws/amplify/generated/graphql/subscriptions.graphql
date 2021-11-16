@@ -5,9 +5,7 @@ subscription OnCreateTaskQl {
     title
     body
     state
-    _version
-    _deleted
-    _lastChangedAt
+    image
     createdAt
     updatedAt
   }
@@ -18,9 +16,7 @@ subscription OnUpdateTaskQl {
     title
     body
     state
-    _version
-    _deleted
-    _lastChangedAt
+    image
     createdAt
     updatedAt
   }
@@ -31,9 +27,7 @@ subscription OnDeleteTaskQl {
     title
     body
     state
-    _version
-    _deleted
-    _lastChangedAt
+    image
     createdAt
     updatedAt
   }
