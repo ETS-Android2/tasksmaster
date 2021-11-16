@@ -54,17 +54,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(goToSettings);
         });
 
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.addPlugin(new AWSS3StoragePlugin());
-            Amplify.addPlugin(new AWSDataStorePlugin());
-            Amplify.configure(getApplicationContext());
-
-            Log.i("Main Activity", "Initialized Amplify");
-        } catch (AmplifyException error) {
-            Log.e("Main Activity", "Could not initialize Amplify", error);
-        }
+//        try {
+//            Amplify.addPlugin(new AWSApiPlugin());
+//            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+//            Amplify.addPlugin(new AWSS3StoragePlugin());
+//            Amplify.addPlugin(new AWSDataStorePlugin());
+//            Amplify.configure(getApplicationContext());
+//
+//            Log.i("Main Activity", "Initialized Amplify");
+//        } catch (AmplifyException error) {
+//            Log.e("Main Activity", "Could not initialize Amplify", error);
+//        }
 
         Amplify.Auth.signInWithWebUI(
                 this,

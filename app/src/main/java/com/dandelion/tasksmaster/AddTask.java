@@ -20,7 +20,6 @@ import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.TaskQl;
-import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,6 +39,17 @@ public class AddTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+
+        try {
+            Amplify.addPlugin(new AWSDataStorePlugin()); // stores records locally
+            Amplify.addPlugin(new AWSApiPlugin()); // stores things in DynamoDB and allows us to perform GraphQL queries
+            Amplify.addPlugin(new AWSCognitoAuthPlugin()); // Add this line, to include the Auth plugin.
+            Amplify.configure(getApplicationContext());
+
+            Log.i("Add tasks", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("Add tasks", "Could not initialize Amplify", error);
+        }
 
         EditText taskTitle = findViewById(R.id.taskTitleField);
         EditText taskBody = findViewById(R.id.taskBodyField);
@@ -103,20 +113,22 @@ public class AddTask extends AppCompatActivity {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent dat) {
+        super.onActivityResult(requestCode, resultCode, dat);
 
         File uploadFile = new File(getApplicationContext().getFilesDir(), "uploadFileCopied");
         try {
 
-            InputStream exampleInputStream = getContentResolver().openInputStream(data.getData());
+            assert dat != null;
+            InputStream exampleInputStream = getContentResolver().openInputStream(dat.getData());
             OutputStream outputStream = new FileOutputStream(uploadFile);
-            imageName = data.getData().toString();
+            imageName = dat.getData().toString();
             byte[] buff = new byte[1024];
             int length;
             while ((length = exampleInputStream.read(buff)) > 0) {
                 outputStream.write(buff, 0, length);
             }
+
             exampleInputStream.close();
             outputStream.close();
             Amplify.Storage.uploadFile(
@@ -129,6 +141,7 @@ public class AddTask extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }
 
 

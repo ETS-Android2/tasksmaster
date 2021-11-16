@@ -1,4 +1,32 @@
 # this is an auto generated file. This will be overwritten
+query SyncTaskQls(
+  $filter: ModelTaskQlFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncTaskQls(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      title
+      body
+      state
+      image
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
 query GetTaskQl($id: ID!) {
   getTaskQl(id: $id) {
     id
@@ -6,6 +34,9 @@ query GetTaskQl($id: ID!) {
     body
     state
     image
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -22,9 +53,13 @@ query ListTaskQls(
       body
       state
       image
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
   }
 }

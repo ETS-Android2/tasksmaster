@@ -1,0 +1,20 @@
+{
+  "name": "nawal",
+  "type": "provider",
+  "commands": [
+    "version",
+    "help"
+  ],
+  "eventHandlers": [
+    "PreInit",
+    "PostInit",
+    "PrePush",
+    "PostPush",
+    "PrePull",
+    "PostPull",
+    "PostEnvAdd",
+    "PreCodegenModels",
+    "PostCodegenModels",
+    "InternalOnlyPostEnvRemove"
+  ]
+}
