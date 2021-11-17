@@ -27,6 +27,7 @@ import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.TargetingClient;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.endpointProfile.EndpointProfile;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.endpointProfile.EndpointProfileUser;
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskQl;
@@ -40,6 +41,8 @@ import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    String userName = getSharedPreferences("pref", MODE_PRIVATE).getString("userInfo", "no user info");
 
     public static final String TAG = MainActivity.class.getSimpleName();
 
@@ -107,18 +110,21 @@ public class MainActivity extends AppCompatActivity {
 
         Button addTask = findViewById(R.id.addTaskBtn);
         addTask.setOnClickListener(v -> {
+            addTaskRecord();
             Intent goToAddTask = new Intent(MainActivity.this, AddTask.class);
             startActivity(goToAddTask);
         });
 
         Button allTasks = findViewById(R.id.allTasksBtn);
         allTasks.setOnClickListener(v -> {
+            allTasksRecord();
             Intent goToAllTasks = new Intent(MainActivity.this, AllTasks.class);
             startActivity(goToAllTasks);
         });
 
         Button settings = findViewById(R.id.SettingsBtn);
         settings.setOnClickListener(v -> {
+            settingsRecord();
             Intent goToSettings = new Intent(MainActivity.this, Settings.class);
             startActivity(goToSettings);
         });
@@ -195,4 +201,29 @@ public class MainActivity extends AppCompatActivity {
         usernameField.setText(username + withMyTask);
     }
 
+    private void addTaskRecord() {
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("Add Task Button Pressed")
+                .addProperty("UserName", userName)
+                .build();
+        Amplify.Analytics.recordEvent(event);
+    }
+
+    private void allTasksRecord() {
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("All Tasks Button Pressed")
+                .addProperty("UserName", userName)
+                .build();
+        Amplify.Analytics.recordEvent(event);
+    }
+
+
+    private void settingsRecord(){
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("Settings Button Pressed")
+                .addProperty("UserName", userName)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
+    }
 }

@@ -16,6 +16,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
@@ -54,6 +55,8 @@ public class Login extends AppCompatActivity {
         } catch (AmplifyException error) {
             Log.e("Main Activity", "Could not initialize Amplify", error);
         }
+
+        signInRecord();
 
         Button login = findViewById(R.id.loginBtn);
         login.setOnClickListener(v -> {
@@ -95,6 +98,15 @@ public class Login extends AppCompatActivity {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+    private void signInRecord() {
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("Logged In Button Pressed")
+                .addProperty("username", true)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
+
     }
 }
 
