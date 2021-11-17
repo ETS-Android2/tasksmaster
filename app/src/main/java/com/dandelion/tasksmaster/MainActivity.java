@@ -42,8 +42,6 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    String userName = getSharedPreferences("pref", MODE_PRIVATE).getString("userInfo", "no user info");
-
     public static final String TAG = MainActivity.class.getSimpleName();
 
     private static PinpointManager pinpointManager;
@@ -182,26 +180,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(goToSignup);
         });
 
-        Button signinButton = findViewById(R.id.signinMain);
-        signinButton.setOnClickListener(v -> {
-            Intent goToSignin = new Intent(MainActivity.this, Login.class);
-            startActivity(goToSignin);
+        Button signInButton = findViewById(R.id.signinMain);
+        signInButton.setOnClickListener(v -> {
+            Intent goToSignIn = new Intent(MainActivity.this, Login.class);
+            startActivity(goToSignIn);
         });
     }
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    protected void onResume() {
-        super.onResume();
-        String withMyTask = "'s Tasks";
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        String username = sharedPreferences.getString("username","user");
-
-        TextView usernameField = findViewById(R.id.myTask);
-        usernameField.setText(username + withMyTask);
-    }
-
     private void addTaskRecord() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String userName = sharedPreferences.getString("username","user");
         AnalyticsEvent event = AnalyticsEvent.builder()
                 .name("Add Task Button Pressed")
                 .addProperty("UserName", userName)
@@ -210,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void allTasksRecord() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String userName = sharedPreferences.getString("username","user");
         AnalyticsEvent event = AnalyticsEvent.builder()
                 .name("All Tasks Button Pressed")
                 .addProperty("UserName", userName)
@@ -217,13 +207,27 @@ public class MainActivity extends AppCompatActivity {
         Amplify.Analytics.recordEvent(event);
     }
 
-
     private void settingsRecord(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String userName = sharedPreferences.getString("username","user");
         AnalyticsEvent event = AnalyticsEvent.builder()
                 .name("Settings Button Pressed")
                 .addProperty("UserName", userName)
                 .build();
 
         Amplify.Analytics.recordEvent(event);
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String withMyTask = "'s Tasks";
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String userName = sharedPreferences.getString("username","user");
+
+        TextView usernameField = findViewById(R.id.myTask);
+        usernameField.setText(userName + withMyTask);
     }
 }

@@ -106,7 +106,6 @@ public class Login extends AppCompatActivity {
                 .build();
 
         Amplify.Analytics.recordEvent(event);
-
     }
 }
 
