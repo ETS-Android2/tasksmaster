@@ -72,9 +72,9 @@ The Storage category comes with default built-in support for Amazon Simple Stora
 
 ## Lab38
 Notifications to be delivered to your app from the cloud
-![notifications](screenshots/notifications.png)
+![notifications](screenshots/notifications.jpg)
 
 ## Lab39
 Add Analytics, Create and send an Event whenever you launch intents that start new activities.
-![analytics](analytics/notifications.png)
+![analytics](screenshots/analytics.png)
 
