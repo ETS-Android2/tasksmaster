@@ -60,7 +60,7 @@ public class AddTask extends AppCompatActivity {
 
         Button addTaskBtn = findViewById(R.id.saveTaskBtn);
         addTaskBtn.setOnClickListener(v -> {
-
+            Toast.makeText(getApplicationContext(), "task added", Toast.LENGTH_SHORT).show();
             String title = taskTitle.getText().toString();
             String body = taskBody.getText().toString();
             String state = taskState.getText().toString();
@@ -77,6 +77,8 @@ public class AddTask extends AppCompatActivity {
                     response -> Log.i("TasksApp", "add task with id" + response.getData().getId()),
                     error -> Log.e("TasksApp", "Create failed", error)
             );
+            Intent intent = new Intent(AddTask.this, MainActivity.class);
+            startActivity(intent);
         });
 
 
@@ -107,7 +109,6 @@ public class AddTask extends AppCompatActivity {
             intent.setType("*/*");
             intent = Intent.createChooser(intent, "intent");
             startActivityForResult(intent, 44);
-            Toast.makeText(getApplicationContext(), "image uploaded", Toast.LENGTH_SHORT).show();
         });
     }
 
