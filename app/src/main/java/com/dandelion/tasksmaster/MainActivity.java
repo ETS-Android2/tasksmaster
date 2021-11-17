@@ -108,21 +108,21 @@ public class MainActivity extends AppCompatActivity {
 
         Button addTask = findViewById(R.id.addTaskBtn);
         addTask.setOnClickListener(v -> {
-            addTaskRecord();
+            actionsRecord();
             Intent goToAddTask = new Intent(MainActivity.this, AddTask.class);
             startActivity(goToAddTask);
         });
 
         Button allTasks = findViewById(R.id.allTasksBtn);
         allTasks.setOnClickListener(v -> {
-            allTasksRecord();
+            actionsRecord();
             Intent goToAllTasks = new Intent(MainActivity.this, AllTasks.class);
             startActivity(goToAllTasks);
         });
 
         Button settings = findViewById(R.id.SettingsBtn);
         settings.setOnClickListener(v -> {
-            settingsRecord();
+            actionsRecord();
             Intent goToSettings = new Intent(MainActivity.this, Settings.class);
             startActivity(goToSettings);
         });
@@ -187,34 +187,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void addTaskRecord() {
+    private void actionsRecord() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         String userName = sharedPreferences.getString("username","user");
         AnalyticsEvent event = AnalyticsEvent.builder()
-                .name("Add Task Button Pressed")
+                .name("Button Pressed")
                 .addProperty("UserName", userName)
                 .build();
-        Amplify.Analytics.recordEvent(event);
-    }
-
-    private void allTasksRecord() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        String userName = sharedPreferences.getString("username","user");
-        AnalyticsEvent event = AnalyticsEvent.builder()
-                .name("All Tasks Button Pressed")
-                .addProperty("UserName", userName)
-                .build();
-        Amplify.Analytics.recordEvent(event);
-    }
-
-    private void settingsRecord(){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        String userName = sharedPreferences.getString("username","user");
-        AnalyticsEvent event = AnalyticsEvent.builder()
-                .name("Settings Button Pressed")
-                .addProperty("UserName", userName)
-                .build();
-
         Amplify.Analytics.recordEvent(event);
     }
 
