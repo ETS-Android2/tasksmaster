@@ -7,7 +7,10 @@ mutation CreateTaskQl(
     id
     title
     body
-    status
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -20,7 +23,10 @@ mutation UpdateTaskQl(
     id
     title
     body
-    status
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -33,7 +39,10 @@ mutation DeleteTaskQl(
     id
     title
     body
-    status
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }

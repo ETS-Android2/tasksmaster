@@ -4,7 +4,10 @@ subscription OnCreateTaskQl {
     id
     title
     body
-    status
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -14,7 +17,10 @@ subscription OnUpdateTaskQl {
     id
     title
     body
-    status
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -24,7 +30,10 @@ subscription OnDeleteTaskQl {
     id
     title
     body
-    status
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }

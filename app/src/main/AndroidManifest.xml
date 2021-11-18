@@ -15,23 +15,16 @@
         android:theme="@style/Theme.Tasksmaster"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".TaskDetail"
-            android:exported="true">
-        </activity>
+            android:name=".Confirm"
+            android:exported="false" />
+        <activity android:name=".Login" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".TaskDetail" />
+        <activity android:name=".Settings" />
+        <activity android:name=".AllTasks" />
+        <activity android:name=".AddTask" />
         <activity
-            android:name=".Settings"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".AllTasks"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".AddTask"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".MainActivity"
+            android:name=".Signup"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

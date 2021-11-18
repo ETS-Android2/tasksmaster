@@ -30,8 +30,6 @@ public final class TaskQl implements Model {
   private final @ModelField(targetType="String") String state;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
-
-
   public String getId() {
       return id;
   }
@@ -56,7 +54,7 @@ public final class TaskQl implements Model {
       return updatedAt;
   }
   
-  public TaskQl(String id, String title, String body, String state) {
+  private TaskQl(String id, String title, String body, String state) {
     this.id = id;
     this.title = title;
     this.body = body;
