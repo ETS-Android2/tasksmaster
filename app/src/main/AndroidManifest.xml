@@ -14,9 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tasksmaster"
         tools:ignore="AllowBackup">
-        <activity
-            android:name=".Confirm"
-            android:exported="false" />
+
+        <service android:name=".PushListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".Confirm" />
         <activity android:name=".Signup" />
         <activity android:name=".MainActivity" />
         <activity android:name=".TaskDetail" />

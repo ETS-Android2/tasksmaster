@@ -3,27 +3,27 @@
 
 ## Lab26
 
-An android application which allows users to manage their tasks . version: 1.0.0
+An android application which allows users to manage their userTasks . version: 1.0.0
 
-- create a home page has an image and two buttons (add task , all tasks) to redirect to other activities.
+- create a home page has an image and two buttons (add userTasks , all userTasks) to redirect to other activities.
 
-- create an add task page has two text plain (title , descreption) and an add buttons shows a message of submitted.
+- create an add userTasks page has two text plain (title , descreption) and an add buttons shows a message of submitted.
 
-- create all tasks page has an image and a back button redirect you back to the home page.
+- create all userTasks page has an image and a back button redirect you back to the home page.
 
 ## Home Page
 ![home](screenshots/home.png)
 
 ## Add Task Page
-![add task](screenshots/addtask.png)
+![add userTasks](screenshots/addtask.png)
 
 ## All Tasks Page
-![all tasks](screenshots/alltasks.png)
+![all userTasks](screenshots/alltasks.png)
 
 
 ## Lab27
 
-- task details page which shows the task title and the descreption.
+- userTasks details page which shows the userTasks title and the descreption.
 
 - a setting page which the user can change his username from there.
 
@@ -31,23 +31,23 @@ An android application which allows users to manage their tasks . version: 1.0.0
 ![home](screenshots/home27.png)
 
 ## Settings Page
-![add task](screenshots/settings.png)
+![add userTasks](screenshots/settings.png)
 
 ## Task Detail Page
 
-![tasks detail](screenshots/task1.png)
-![tasks detail](screenshots/task2.png)
-![tasks detail](screenshots/task3.png)
+![userTasks detail](screenshots/task1.png)
+![userTasks detail](screenshots/task2.png)
+![userTasks detail](screenshots/task3.png)
 
 ## Lab28
-create a recycler view to show 3 hardcoded tasks.
+create a recycler view to show 3 hardcoded userTasks.
 
 ## Home Page
 ![home](screenshots/lab29.png)
 
 ## Lab29
 add data base to store data inside.
-when adding a new task from add task page the task will be stored in the data base.
+when adding a new userTasks from add userTasks page the userTasks will be stored in the data base.
 
 ## Lab31
 Adding Tests for the activities

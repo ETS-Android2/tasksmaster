@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,16 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    List <Task> allTasks = new ArrayList<>();
+    List <UserTasks> allUserTasks = new ArrayList<>();
 
 
-    public TaskAdapter(List<Task> allTasks) {
-        this.allTasks = allTasks;
+    public TaskAdapter(List<UserTasks> allUserTasks) {
+        this.allUserTasks = allUserTasks;
     }
 
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
-        public Task task;
+        public UserTasks userTasks;
         View itemView;
 
         public TaskViewHolder(@NonNull View itemView) {
@@ -45,25 +44,25 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TaskAdapter.TaskViewHolder taskViewHolder, @SuppressLint("RecyclerView") int position) {
-        taskViewHolder.task = allTasks.get(position);
+        taskViewHolder.userTasks = allUserTasks.get(position);
         TextView taskTitle = taskViewHolder.itemView.findViewById(R.id.taskTitleInFragment);
         TextView taskBody = taskViewHolder.itemView.findViewById(R.id.taskBodyInFragment);
         TextView taskState= taskViewHolder.itemView.findViewById(R.id.taskStateInFragment);
 
-        taskTitle.setText(taskViewHolder.task.title);
-        taskBody.setText(taskViewHolder.task.body);
-        taskState.setText(taskViewHolder.task.state);
-        taskState.setText(taskViewHolder.task.state);
+        taskTitle.setText(taskViewHolder.userTasks.title);
+        taskBody.setText(taskViewHolder.userTasks.body);
+        taskState.setText(taskViewHolder.userTasks.state);
+        taskState.setText(taskViewHolder.userTasks.state);
 
 
         taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), TaskDetail.class);
-                intent.putExtra("title", allTasks.get(position).title);
-                intent.putExtra("body", allTasks.get(position).body);
-                intent.putExtra("state", allTasks.get(position).state);
-                intent.putExtra("image", allTasks.get(position).image);
+                intent.putExtra("title", allUserTasks.get(position).title);
+                intent.putExtra("body", allUserTasks.get(position).body);
+                intent.putExtra("state", allUserTasks.get(position).state);
+                intent.putExtra("image", allUserTasks.get(position).image);
                 view.getContext().startActivity(intent);
             }
         });
@@ -71,7 +70,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public int getItemCount() {
-        return allTasks.size();
+        return allUserTasks.size();
     }
 
 }

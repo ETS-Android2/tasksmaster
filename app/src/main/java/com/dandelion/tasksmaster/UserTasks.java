@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Task {
+public class UserTasks {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -23,10 +23,10 @@ public class Task {
     public String image;
 
 
-    public Task(){
+    public UserTasks(){
 
     }
-    public Task(String title, String body, String state, String image) {
+    public UserTasks(String title, String body, String state, String image) {
         this.title = title;
         this.body = body;
         this.state = state;
