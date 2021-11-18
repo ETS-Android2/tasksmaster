@@ -24,10 +24,12 @@ public final class TaskQl implements Model {
   public static final QueryField TITLE = field("TaskQl", "title");
   public static final QueryField BODY = field("TaskQl", "body");
   public static final QueryField STATE = field("TaskQl", "state");
+  public static final QueryField IMAGE = field("TaskQl", "image");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String") String body;
   private final @ModelField(targetType="String") String state;
+  private final @ModelField(targetType="String") String image;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -46,6 +48,10 @@ public final class TaskQl implements Model {
       return state;
   }
   
+  public String getImage() {
+      return image;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -54,11 +60,12 @@ public final class TaskQl implements Model {
       return updatedAt;
   }
   
-  private TaskQl(String id, String title, String body, String state) {
+  private TaskQl(String id, String title, String body, String state, String image) {
     this.id = id;
     this.title = title;
     this.body = body;
     this.state = state;
+    this.image = image;
   }
   
   @Override
@@ -73,6 +80,7 @@ public final class TaskQl implements Model {
               ObjectsCompat.equals(getTitle(), taskQl.getTitle()) &&
               ObjectsCompat.equals(getBody(), taskQl.getBody()) &&
               ObjectsCompat.equals(getState(), taskQl.getState()) &&
+              ObjectsCompat.equals(getImage(), taskQl.getImage()) &&
               ObjectsCompat.equals(getCreatedAt(), taskQl.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), taskQl.getUpdatedAt());
       }
@@ -85,6 +93,7 @@ public final class TaskQl implements Model {
       .append(getTitle())
       .append(getBody())
       .append(getState())
+      .append(getImage())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -99,6 +108,7 @@ public final class TaskQl implements Model {
       .append("title=" + String.valueOf(getTitle()) + ", ")
       .append("body=" + String.valueOf(getBody()) + ", ")
       .append("state=" + String.valueOf(getState()) + ", ")
+      .append("image=" + String.valueOf(getImage()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -122,6 +132,7 @@ public final class TaskQl implements Model {
       id,
       null,
       null,
+      null,
       null
     );
   }
@@ -130,7 +141,8 @@ public final class TaskQl implements Model {
     return new CopyOfBuilder(id,
       title,
       body,
-      state);
+      state,
+      image);
   }
   public interface TitleStep {
     BuildStep title(String title);
@@ -142,6 +154,7 @@ public final class TaskQl implements Model {
     BuildStep id(String id);
     BuildStep body(String body);
     BuildStep state(String state);
+    BuildStep image(String image);
   }
   
 
@@ -150,6 +163,7 @@ public final class TaskQl implements Model {
     private String title;
     private String body;
     private String state;
+    private String image;
     @Override
      public TaskQl build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -158,7 +172,8 @@ public final class TaskQl implements Model {
           id,
           title,
           body,
-          state);
+          state,
+          image);
     }
     
     @Override
@@ -180,6 +195,12 @@ public final class TaskQl implements Model {
         return this;
     }
     
+    @Override
+     public BuildStep image(String image) {
+        this.image = image;
+        return this;
+    }
+    
     /** 
      * @param id id
      * @return Current Builder instance, for fluent method chaining
@@ -192,11 +213,12 @@ public final class TaskQl implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String body, String state) {
+    private CopyOfBuilder(String id, String title, String body, String state, String image) {
       super.id(id);
       super.title(title)
         .body(body)
-        .state(state);
+        .state(state)
+        .image(image);
     }
     
     @Override
@@ -212,6 +234,11 @@ public final class TaskQl implements Model {
     @Override
      public CopyOfBuilder state(String state) {
       return (CopyOfBuilder) super.state(state);
+    }
+    
+    @Override
+     public CopyOfBuilder image(String image) {
+      return (CopyOfBuilder) super.image(image);
     }
   }
   

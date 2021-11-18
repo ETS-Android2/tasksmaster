@@ -8,6 +8,7 @@ mutation CreateTaskQl(
     title
     body
     state
+    image
     _version
     _deleted
     _lastChangedAt
@@ -24,6 +25,7 @@ mutation UpdateTaskQl(
     title
     body
     state
+    image
     _version
     _deleted
     _lastChangedAt
@@ -40,6 +42,7 @@ mutation DeleteTaskQl(
     title
     body
     state
+    image
     _version
     _deleted
     _lastChangedAt

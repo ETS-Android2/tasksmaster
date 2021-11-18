@@ -16,6 +16,7 @@ query SyncTaskQls(
       title
       body
       state
+      image
       _version
       _deleted
       _lastChangedAt
@@ -32,6 +33,7 @@ query GetTaskQl($id: ID!) {
     title
     body
     state
+    image
     _version
     _deleted
     _lastChangedAt
@@ -50,6 +52,7 @@ query ListTaskQls(
       title
       body
       state
+      image
       _version
       _deleted
       _lastChangedAt
