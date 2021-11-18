@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,6 +22,7 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskQl;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             Amplify.addPlugin(new AWSApiPlugin());
-            // Add this line, to include the Auth plugin.
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
             Amplify.configure(getApplicationContext());
 
 
@@ -104,25 +104,29 @@ public class MainActivity extends AppCompatActivity {
         );
 
         Button signoutButton = findViewById(R.id.logoutBtn);
-        signoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View V) {
+        signoutButton.setOnClickListener(V -> {
 
 
-                Amplify.Auth.signOut(
-                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
-                        error -> Log.e("AuthQuickstart", error.toString())
+            Amplify.Auth.signOut(
+                    () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                    error -> Log.e("AuthQuickstart", error.toString())
 
-                );
+            );
 
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        recreate();
-                    }
-                }, 3000);
-            }
+            final Handler handler1 = new Handler();
+            handler1.postDelayed(this::recreate, 3000);
+        });
+
+        Button signupButton = findViewById(R.id.signupMain);
+        signupButton.setOnClickListener(v -> {
+            Intent goToSignup = new Intent(MainActivity.this, Signup.class);
+            startActivity(goToSignup);
+        });
+
+        Button signinButton = findViewById(R.id.signinMain);
+        signinButton.setOnClickListener(v -> {
+            Intent goToSignin = new Intent(MainActivity.this, Signup.class);
+            startActivity(goToSignin);
         });
     }
 

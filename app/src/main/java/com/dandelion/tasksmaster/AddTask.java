@@ -1,17 +1,25 @@
 package com.dandelion.tasksmaster;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskQl;
+import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class AddTask extends AppCompatActivity {
     AppDatabase appDatabase;
@@ -22,6 +30,17 @@ public class AddTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSS3StoragePlugin());
+            Amplify.configure(getApplicationContext());
+
+
+            Log.i("Main Activity", "Initialized Amplify");
+        } catch (AmplifyException error) {
+            Log.e("Main Activity", "Could not initialize Amplify", error);
+        }
 
         EditText taskTitle = findViewById(R.id.taskTitleField);
         EditText taskBody = findViewById(R.id.taskBodyField);
@@ -51,6 +70,32 @@ public class AddTask extends AppCompatActivity {
             );
         });
 
+        Button upload = findViewById(R.id.addImage);
+        upload.setOnClickListener(view -> {
 
+            uploadFile();
+            Toast.makeText(getApplicationContext(),  "image uploaded", Toast.LENGTH_SHORT).show();
+
+        });
+    }
+
+    private void uploadFile() {
+        File exampleFile = new File(getApplicationContext().getFilesDir(), "ExampleKey");
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(exampleFile));
+            writer.append("Example file contents");
+            writer.close();
+        } catch (Exception exception) {
+            Log.e("MyAmplifyApp", "Upload failed", exception);
+        }
+
+        Amplify.Storage.uploadFile(
+                "ExampleKey",
+                exampleFile,
+                result -> Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey()),
+                storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+        );
     }
 }
+

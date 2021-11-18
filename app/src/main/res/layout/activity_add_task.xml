@@ -125,4 +125,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.585" />
 
+    <Button
+        android:id="@+id/addImage"
+        android:layout_width="120dp"
+        android:layout_height="55dp"
+        android:text="Add Image"
+        tools:layout_editor_absoluteX="215dp"
+        tools:layout_editor_absoluteY="525dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
