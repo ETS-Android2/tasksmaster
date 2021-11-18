@@ -1,17 +1,17 @@
 package com.dandelion.tasksmaster;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
@@ -48,6 +48,8 @@ public class Signup extends AppCompatActivity {
             Log.e("Main Activity", "Could not initialize Amplify", error);
         }
 
+        signUpRecord();
+
         Button signup = findViewById(R.id.signupButton);
         signup.setOnClickListener(v -> {
             Amplify.Auth.fetchAuthSession(
@@ -71,5 +73,14 @@ public class Signup extends AppCompatActivity {
             SharedPreferencesEditor.apply();
             startActivity(intent);
         });
+    }
+
+    private void signUpRecord() {
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("Logged In Button Pressed")
+                .addProperty("username", true)
+                .build();
+
+        Amplify.Analytics.recordEvent(event);
     }
 }

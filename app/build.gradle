@@ -92,5 +92,9 @@ dependencies {
 
     implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.33.0'
     implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.35.0'
+
+    // pinpoint & analytical
+    implementation 'com.amplifyframework:aws-analytics-pinpoint:1.29.0'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.29.0'
 }
 apply plugin: 'com.google.gms.google-services'

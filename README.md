@@ -64,3 +64,17 @@ build APK for the app.
 Authentication (sign up, confirm and login activities)
 ![users](screenshots/users.png)
 ![signup](screenshots/signup.png)
+
+## Lab37
+Create Amplify Storage category provides an interface for managing user content for your app in public, protected, or private storage buckets.
+The Storage category comes with default built-in support for Amazon Simple Storage Service (S3).
+![s3](screenshots/s3.png)
+
+## Lab38
+Notifications to be delivered to your app from the cloud
+![notifications](screenshots/notifications.jpg)
+
+## Lab39
+Add Analytics, Create and send an Event whenever you launch intents that start new activities.
+![analytics](screenshots/analytics.png)
+

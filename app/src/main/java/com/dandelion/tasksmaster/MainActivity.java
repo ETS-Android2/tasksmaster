@@ -27,6 +27,7 @@ import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.TargetingClient;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.endpointProfile.EndpointProfile;
 import com.amazonaws.mobileconnectors.pinpoint.targeting.endpointProfile.EndpointProfileUser;
+import com.amplifyframework.analytics.AnalyticsEvent;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.TaskQl;
@@ -107,18 +108,21 @@ public class MainActivity extends AppCompatActivity {
 
         Button addTask = findViewById(R.id.addTaskBtn);
         addTask.setOnClickListener(v -> {
+            actionsRecord();
             Intent goToAddTask = new Intent(MainActivity.this, AddTask.class);
             startActivity(goToAddTask);
         });
 
         Button allTasks = findViewById(R.id.allTasksBtn);
         allTasks.setOnClickListener(v -> {
+            actionsRecord();
             Intent goToAllTasks = new Intent(MainActivity.this, AllTasks.class);
             startActivity(goToAllTasks);
         });
 
         Button settings = findViewById(R.id.SettingsBtn);
         settings.setOnClickListener(v -> {
+            actionsRecord();
             Intent goToSettings = new Intent(MainActivity.this, Settings.class);
             startActivity(goToSettings);
         });
@@ -176,12 +180,23 @@ public class MainActivity extends AppCompatActivity {
             startActivity(goToSignup);
         });
 
-        Button signinButton = findViewById(R.id.signinMain);
-        signinButton.setOnClickListener(v -> {
-            Intent goToSignin = new Intent(MainActivity.this, Login.class);
-            startActivity(goToSignin);
+        Button signInButton = findViewById(R.id.signinMain);
+        signInButton.setOnClickListener(v -> {
+            Intent goToSignIn = new Intent(MainActivity.this, Login.class);
+            startActivity(goToSignIn);
         });
     }
+
+    private void actionsRecord() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String userName = sharedPreferences.getString("username","user");
+        AnalyticsEvent event = AnalyticsEvent.builder()
+                .name("Button Pressed")
+                .addProperty("UserName", userName)
+                .build();
+        Amplify.Analytics.recordEvent(event);
+    }
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -189,10 +204,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         String withMyTask = "'s Tasks";
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        String username = sharedPreferences.getString("username","user");
+        String userName = sharedPreferences.getString("username","user");
 
         TextView usernameField = findViewById(R.id.myTask);
-        usernameField.setText(username + withMyTask);
+        usernameField.setText(userName + withMyTask);
     }
-
 }
