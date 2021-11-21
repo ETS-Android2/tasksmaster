@@ -143,6 +143,15 @@ public class AddTask extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intentRecieving = getIntent();
+        if(intentRecieving.getType() !=null && intentRecieving.getType().equals("text/plain")){
+            EditText taskDescription= findViewById(R.id.taskBodyField);
+            taskDescription.setText(intentRecieving.getExtras().get(Intent.EXTRA_TEXT).toString());
+        }
+    }
 }
 
 
