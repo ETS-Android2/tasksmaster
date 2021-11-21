@@ -78,3 +78,7 @@ Notifications to be delivered to your app from the cloud
 Add Analytics, Create and send an Event whenever you launch intents that start new activities.
 ![analytics](screenshots/analytics.png)
 
+## Lab41
+Add an intent filter which allow users to share text  from another application.
+![](screenshots/intent.png)
+![](screenshots/intent2.png)
