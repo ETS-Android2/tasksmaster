@@ -80,5 +80,5 @@ Add Analytics, Create and send an Event whenever you launch intents that start n
 
 ## Lab41
 Add an intent filter which allow users to share text  from another application.
-![](screenshots/intent.png)
-![](screenshots/intent2.png)
+![](screenshots/intent.jpg)
+![](screenshots/intent2.jpg)
