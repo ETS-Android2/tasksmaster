@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Settings extends AppCompatActivity {
-
+    public static final String ACTION_LOCATION_SOURCE_SETTINGS = "LOCATION_SOURCE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -23,6 +23,13 @@ public class UserTasks {
     public String image;
 
 
+    @ColumnInfo(name = "Longitude")
+    public String Longitude;
+
+
+    @ColumnInfo(name = "Latitude")
+    public String Latitude;
+
     public UserTasks(){
 
     }

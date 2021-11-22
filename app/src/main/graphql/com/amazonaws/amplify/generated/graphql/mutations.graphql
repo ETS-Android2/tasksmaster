@@ -9,6 +9,8 @@ mutation CreateTaskQl(
     body
     state
     image
+    latitude
+    longitude
     _version
     _deleted
     _lastChangedAt
@@ -26,6 +28,8 @@ mutation UpdateTaskQl(
     body
     state
     image
+    latitude
+    longitude
     _version
     _deleted
     _lastChangedAt
@@ -43,6 +47,8 @@ mutation DeleteTaskQl(
     body
     state
     image
+    latitude
+    longitude
     _version
     _deleted
     _lastChangedAt

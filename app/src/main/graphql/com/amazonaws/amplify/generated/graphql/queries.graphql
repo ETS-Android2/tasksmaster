@@ -17,6 +17,8 @@ query SyncTaskQls(
       body
       state
       image
+      latitude
+      longitude
       _version
       _deleted
       _lastChangedAt
@@ -34,6 +36,8 @@ query GetTaskQl($id: ID!) {
     body
     state
     image
+    latitude
+    longitude
     _version
     _deleted
     _lastChangedAt
@@ -53,6 +57,8 @@ query ListTaskQls(
       body
       state
       image
+      latitude
+      longitude
       _version
       _deleted
       _lastChangedAt

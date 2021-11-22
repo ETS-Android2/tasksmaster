@@ -6,6 +6,8 @@ subscription OnCreateTaskQl {
     body
     state
     image
+    latitude
+    longitude
     _version
     _deleted
     _lastChangedAt
@@ -20,6 +22,8 @@ subscription OnUpdateTaskQl {
     body
     state
     image
+    latitude
+    longitude
     _version
     _deleted
     _lastChangedAt
@@ -34,6 +38,8 @@ subscription OnDeleteTaskQl {
     body
     state
     image
+    latitude
+    longitude
     _version
     _deleted
     _lastChangedAt
