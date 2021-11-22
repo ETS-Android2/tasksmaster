@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso;
 
 
 public class TaskDetail extends AppCompatActivity implements OnMapReadyCallback {
-    private GoogleMap map;
+    private GoogleMap googleMap;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +63,8 @@ public class TaskDetail extends AppCompatActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         Intent intent = getIntent();
-        LatLng myLocation = new LatLng(getIntent().getDoubleExtra("lat", intent.getFloatExtra("lat",0)),
-                getIntent().getDoubleExtra("lon", intent.getFloatExtra("lon",0)));
+        LatLng myLocation = new LatLng(getIntent().getDoubleExtra("latitude", intent.getFloatExtra("latitude", (float) 31.8639629)),
+                getIntent().getDoubleExtra("longitude", intent.getFloatExtra("longitude", (float) 35.9191529)));
         googleMap.addMarker(new MarkerOptions().position(myLocation).title("My Location In Jordan"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
     }

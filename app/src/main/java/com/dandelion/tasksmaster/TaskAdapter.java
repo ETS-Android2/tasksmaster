@@ -63,8 +63,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                 intent.putExtra("body", allUserTasks.get(position).body);
                 intent.putExtra("state", allUserTasks.get(position).state);
                 intent.putExtra("image", allUserTasks.get(position).image);
-                intent.putExtra("Latitude",allUserTasks.get(position).Latitude);
-                intent.putExtra("Longitude",allUserTasks.get(position).Longitude);
+                intent.putExtra("latitude",allUserTasks.get(position).Latitude);
+                intent.putExtra("longitude",allUserTasks.get(position).Longitude);
                 view.getContext().startActivity(intent);
             }
         });
