@@ -35,10 +35,7 @@ public class Settings extends AppCompatActivity {
                 SharedPreferencesEditor.putString("username", username);
                 SharedPreferencesEditor.apply();
                 startActivity(intent);
-
-
             }
         });
-
     }
 }

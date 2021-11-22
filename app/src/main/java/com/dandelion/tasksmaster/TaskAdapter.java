@@ -11,20 +11,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.TaskQl;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
-    List <UserTasks> allUserTasks = new ArrayList<>();
+    List <TaskQl> allTasks = new ArrayList<>();
 
 
-    public TaskAdapter(List<UserTasks> allUserTasks) {
-        this.allUserTasks = allUserTasks;
+    public TaskAdapter(List<TaskQl> allTasks) {
+        this.allTasks = allTasks;
     }
 
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder{
-        public UserTasks userTasks;
+        public TaskQl taskQl;
         View itemView;
 
         public TaskViewHolder(@NonNull View itemView) {
@@ -44,27 +46,26 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TaskAdapter.TaskViewHolder taskViewHolder, @SuppressLint("RecyclerView") int position) {
-        taskViewHolder.userTasks = allUserTasks.get(position);
+        taskViewHolder.taskQl = allTasks.get(position);
         TextView taskTitle = taskViewHolder.itemView.findViewById(R.id.taskTitleInFragment);
         TextView taskBody = taskViewHolder.itemView.findViewById(R.id.taskBodyInFragment);
         TextView taskState= taskViewHolder.itemView.findViewById(R.id.taskStateInFragment);
 
-        taskTitle.setText(taskViewHolder.userTasks.title);
-        taskBody.setText(taskViewHolder.userTasks.body);
-        taskState.setText(taskViewHolder.userTasks.state);
-        taskState.setText(taskViewHolder.userTasks.state);
+        taskTitle.setText(taskViewHolder.taskQl.getTitle());
+        taskBody.setText(taskViewHolder.taskQl.getBody());
+        taskState.setText(taskViewHolder.taskQl.getState());
 
 
         taskViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), TaskDetail.class);
-                intent.putExtra("title", allUserTasks.get(position).title);
-                intent.putExtra("body", allUserTasks.get(position).body);
-                intent.putExtra("state", allUserTasks.get(position).state);
-                intent.putExtra("image", allUserTasks.get(position).image);
-                intent.putExtra("latitude",allUserTasks.get(position).Latitude);
-                intent.putExtra("longitude",allUserTasks.get(position).Longitude);
+                intent.putExtra("title", allTasks.get(position).getTitle());
+                intent.putExtra("body", allTasks.get(position).getBody());
+                intent.putExtra("state", allTasks.get(position).getState());
+                intent.putExtra("image", allTasks.get(position).getImage());
+                intent.putExtra("latitude",allTasks.get(position).getLatitude());
+                intent.putExtra("longitude",allTasks.get(position).getLongitude());
                 view.getContext().startActivity(intent);
             }
         });
@@ -72,7 +73,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public int getItemCount() {
-        return allUserTasks.size();
+        return allTasks.size();
     }
 
 }

@@ -69,7 +69,7 @@ public final class TaskQl implements Model {
       return updatedAt;
   }
   
-  private TaskQl(String id, String title, String body, String state, String image, Double latitude, Double longitude) {
+  public TaskQl(String id, String title, String body, String state, String image, Double latitude, Double longitude) {
     this.id = id;
     this.title = title;
     this.body = body;

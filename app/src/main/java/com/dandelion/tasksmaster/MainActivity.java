@@ -138,10 +138,10 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AmplifyQuickstart", error.toString())
         );
 
-        List<UserTasks> userTasks = new ArrayList<>();
+        List<TaskQl> taskQls = new ArrayList<>();
         RecyclerView myTasks = findViewById(R.id.recycle);
         myTasks.setLayoutManager(new LinearLayoutManager(this));
-        myTasks.setAdapter(new TaskAdapter(userTasks));
+        myTasks.setAdapter(new TaskAdapter(taskQls));
 
 
         @SuppressLint("NotifyDataSetChanged") Handler handler = new Handler(Looper.myLooper(), msg -> {
@@ -153,9 +153,10 @@ public class MainActivity extends AppCompatActivity {
                 ModelQuery.list(TaskQl.class),
                 response -> {
                     for (TaskQl todo : response.getData()) {
-                        UserTasks userTasksOrg = new UserTasks(todo.getTitle(), todo.getBody(), todo.getState(), todo.getImage());
+//                        TaskQl userTasksOrg = new TaskQl(todo.getTitle(), todo.getBody(), todo.getState(), todo.getImage());
+
                         Log.i("graph testing", todo.getTitle());
-                        userTasks.add(userTasksOrg);
+                        taskQls.add(todo);
                     }
                     handler.sendEmptyMessage(1);
                 },

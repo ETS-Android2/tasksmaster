@@ -59,15 +59,13 @@ public class TaskDetail extends AppCompatActivity implements OnMapReadyCallback 
         });
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         Intent intent = getIntent();
-        LatLng myLocation = new LatLng(getIntent().getDoubleExtra("latitude", intent.getFloatExtra("latitude", (float) 31.8639629)),
-                getIntent().getDoubleExtra("longitude", intent.getFloatExtra("longitude", (float) 35.9191529)));
+        LatLng myLocation = new LatLng(getIntent().getDoubleExtra("latitude", intent.getFloatExtra("latitude",0)),
+                getIntent().getDoubleExtra("longitude", intent.getFloatExtra("longitude",0)));
         googleMap.addMarker(new MarkerOptions().position(myLocation).title("My Location In Jordan"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
     }
-
 }
 
