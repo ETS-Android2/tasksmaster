@@ -4,28 +4,30 @@ package com.dandelion.tasksmaster;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 
 
-public class TaskDetail extends AppCompatActivity {
-
+public class TaskDetail extends AppCompatActivity implements OnMapReadyCallback {
+    private GoogleMap googleMap;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         Intent intent = getIntent();
 
         TextView titleText = findViewById(R.id.taskTitleView);
@@ -44,14 +46,26 @@ public class TaskDetail extends AppCompatActivity {
         ImageView image = findViewById(R.id.storeImg);
         Picasso.get().load(url).into(image);
 
+        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        if (supportMapFragment != null) {
+            supportMapFragment.getMapAsync(this);
+        }
+
         Button goHomeButtonDetail = findViewById(R.id.homeButtonDetail);
-        goHomeButtonDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View V) {
-                Intent goHomeTasks = new Intent(TaskDetail.this, MainActivity.class);
-                startActivity(goHomeTasks);
-            }
+        goHomeButtonDetail.setOnClickListener(V -> {
+            Intent goHomeTasks = new Intent(TaskDetail.this, MainActivity.class);
+            startActivity(goHomeTasks);
         });
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        Intent intent = getIntent();
+        LatLng myLocation = new LatLng(getIntent().getDoubleExtra("latitude", intent.getFloatExtra("latitude",0)),
+                getIntent().getDoubleExtra("longitude", intent.getFloatExtra("longitude",0)));
+        googleMap.addMarker(new MarkerOptions().position(myLocation).title("My Location In Jordan"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
     }
 }
 

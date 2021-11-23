@@ -4,4 +4,6 @@ type TaskQl @model {
   body: String
   state: String
   image: String
+  latitude: Float
+  longitude: Float
 }

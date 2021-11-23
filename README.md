@@ -82,3 +82,8 @@ Add Analytics, Create and send an Event whenever you launch intents that start n
 Add an intent filter which allow users to share text  from another application.
 ![](screenshots/intent.jpg)
 ![](screenshots/intent2.jpg)
+
+# LAb42
+ Add the user’s location to a task automatically when that task is created.
+ ![](screenshots/location1.jpg)
+ ![](screenshots/location2.jpg)
