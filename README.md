@@ -87,3 +87,8 @@ Add an intent filter which allow users to share text  from another application.
  Add the user’s location to a task automatically when that task is created.
  ![](screenshots/location1.jpg)
  ![](screenshots/location2.jpg)
+
+ # Lab43
+ Add analytics to the application that allow tracking user sessions within the application.
+ ![](screenshots/events.png)
+
